@@ -13,8 +13,8 @@ namespace ExpenseManagement.Domain.Entities
         public string Title { get; set; }
         public string Description {  get; set; }
         public double Amount {  get; set; }
-        public ExpenseStatus Status {  get; set; }
-        public DateTime Created {  get; set; }
+        public ExpenseStatus Status { get; set; } = ExpenseStatus.Pending;
+        public DateTime Created {  get; set; } = DateTime.Now;
 
     }
 }

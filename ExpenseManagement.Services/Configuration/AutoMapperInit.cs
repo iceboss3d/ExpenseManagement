@@ -10,6 +10,7 @@ namespace ExpenseManagement.Services.Configuration
         {
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<User, UserResponseDTO>().ReverseMap();
+            CreateMap<Expense, ExpenseDTO>().ReverseMap();
         }
     }
 }

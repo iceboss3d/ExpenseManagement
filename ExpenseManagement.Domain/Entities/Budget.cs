@@ -8,7 +8,7 @@ namespace ExpenseManagement.Domain.Entities
 {
     public class Budget
     {
-        public int Id {  get; set; }
+        public Guid Id {  get; set; } = Guid.NewGuid();
         public double Balance { get; set; } = 0;
     }
 }
