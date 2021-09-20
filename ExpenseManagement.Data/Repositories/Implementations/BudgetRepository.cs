@@ -25,6 +25,7 @@ namespace ExpenseManagement.Data.Repositories.Implementations
             {
                 Budget newBudget = new Budget();
                 await _dbContext.Budgets.AddAsync(newBudget);
+                await _dbContext.SaveChangesAsync();
                 return newBudget;
             }
             
@@ -36,6 +37,16 @@ namespace ExpenseManagement.Data.Repositories.Implementations
             Budget budget = _dbContext.Budgets.FirstOrDefault();
             budget.Balance += amount;
             _dbContext.Budgets.Update(budget);
+            _dbContext.SaveChanges();
+            return true;
+        }
+
+        public bool ReduceBalance(double amount)
+        {
+            Budget budget = _dbContext.Budgets.FirstOrDefault();
+            budget.Balance -= amount;
+            _dbContext.Budgets.Update(budget);
+            _dbContext.SaveChanges();
             return true;
         }
     }

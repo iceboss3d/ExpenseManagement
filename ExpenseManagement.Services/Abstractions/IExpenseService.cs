@@ -14,6 +14,6 @@ namespace ExpenseManagement.Services.Abstractions
         string GetExpenseStatus(string id);
         Expense GetExpense(string id);
         List<Expense> GetExpenses();
-        bool UpdateStatus (string id, string status);
+        Task<bool> UpdateStatus (string id, string status);
     }
 }

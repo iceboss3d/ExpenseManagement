@@ -47,7 +47,7 @@ namespace ExpenseManagement.Services.Implementations
         {
             try
             {
-                Expense expense = _expenseRepository.GetExpense(Guid.Parse(id));
+                Expense expense = _expenseRepository.GetExpense(id);
                 if(expense == null)
                 {
                     throw new ArgumentNullException("Enitity not Found");
@@ -76,7 +76,7 @@ namespace ExpenseManagement.Services.Implementations
         {
             try
             {
-                Expense expense = _expenseRepository.GetExpense(Guid.Parse(id));
+                Expense expense = _expenseRepository.GetExpense(id);
                 if (expense == null)
                 {
                     throw new ArgumentNullException("Enitity not Found");
@@ -89,20 +89,30 @@ namespace ExpenseManagement.Services.Implementations
             }
         }
 
-        public bool UpdateStatus(string id, string status)
+        public async Task<bool> UpdateStatus(string id, string status)
         {
             try
             {
-                Expense expense = _expenseRepository.GetExpense(Guid.Parse(id));
+                Expense expense = _expenseRepository.GetExpense(id);
                 if(expense == null)
                 {
                     throw new ArgumentNullException("Enitity not Found");
                 }
-                if(status != "Approved" || status != "Rejected")
+                if(status != "Approved" && status != "Rejected")
                 {
                     throw new ArgumentException("Invalid Status");
                 }
-                bool result = _expenseRepository.UpdateStatus(Guid.Parse(id), status == "Approved" ? ExpenseStatus.Approved : ExpenseStatus.Rejected);
+                if(status == "Approved")
+                {
+                    Budget budget = await _budgetRepository.GetBudget();
+                    double newBalance = budget.Balance - expense.Amount;
+                    if (newBalance < 0)
+                    {
+                        throw new ArgumentException("Expense exceeds budget");
+                    }
+                    _budgetRepository.ReduceBalance(newBalance);
+                }
+                bool result = _expenseRepository.UpdateStatus(id, status == "Approved" ? ExpenseStatus.Approved : ExpenseStatus.Rejected);
                 return result;
                 
             }

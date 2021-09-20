@@ -54,12 +54,16 @@ namespace ExpenseManagement.API.Controllers
         [HttpPatch]
         [Route("update-status")]
         [Authorize(Roles = "Admin")]
-        public ActionResult UpdateStatus(string expenseId, string status)
+        public async Task<ActionResult> UpdateStatus(string expenseId, string status)
         {
             try
             {
-                bool result = _expenseService.UpdateStatus(expenseId, status);
-                return Ok(result);
+                bool result = await _expenseService.UpdateStatus(expenseId, status);
+                if (result)
+                {
+                    return Ok("Expense Updated");
+                }
+                return BadRequest("Expense not Updated");
             }
             catch (Exception ex)
             {

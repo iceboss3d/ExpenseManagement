@@ -3,14 +3,16 @@ using System;
 using ExpenseManagement.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpenseManagement.Data.Migrations
 {
     [DbContext(typeof(ExpenseManagementDbContext))]
-    partial class ExpenseManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210920141644_new-migration")]
+    partial class newmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

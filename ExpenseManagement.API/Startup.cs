@@ -38,6 +38,7 @@ namespace ExpenseManagement.API
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<IExpenseService, ExpenseService>();
             services.AddScoped<IBudgetRepository, BudgetRepository>();
+            services.AddScoped<IBudgetService, BudgetService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddDbContext<ExpenseManagementDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("default")));

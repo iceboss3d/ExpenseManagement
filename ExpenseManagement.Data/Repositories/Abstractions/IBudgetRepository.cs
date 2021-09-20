@@ -11,5 +11,6 @@ namespace ExpenseManagement.Data.Repositories.Abstractions
     {
         Task<Budget> GetBudget();
         bool Update(double amount);
+        bool ReduceBalance(double amount);
     }
 }

@@ -26,7 +26,7 @@ namespace ExpenseManagement.Data.Repositories.Implementations
             return expense;
         }
 
-        public Expense GetExpense(Guid expenseId)
+        public Expense GetExpense(string expenseId)
         {
             return _dbContext.Expenses.FirstOrDefault(expense =>  expense.Id == expenseId);
         }
@@ -36,7 +36,7 @@ namespace ExpenseManagement.Data.Repositories.Implementations
             return _dbContext.Expenses.ToList();
         }
 
-        public  bool UpdateStatus(Guid expenseId, ExpenseStatus status)
+        public  bool UpdateStatus(string expenseId, ExpenseStatus status)
         {
             Expense expense = _dbContext.Expenses.FirstOrDefault( expense => expense.Id == expenseId);
             if (expense == null)
@@ -45,6 +45,7 @@ namespace ExpenseManagement.Data.Repositories.Implementations
             }
             expense.Status = status;
             _dbContext.Expenses.Update(expense);
+            _dbContext.SaveChanges();
             return true;
         }
     }

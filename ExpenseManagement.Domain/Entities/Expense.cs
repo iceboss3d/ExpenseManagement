@@ -9,7 +9,7 @@ namespace ExpenseManagement.Domain.Entities
 {
     public class Expense
     {
-        public Guid Id {  get; set; } = Guid.NewGuid();
+        public string Id {  get; set; } = Guid.NewGuid().ToString();
         public string Title { get; set; }
         public string Description {  get; set; }
         public double Amount {  get; set; }

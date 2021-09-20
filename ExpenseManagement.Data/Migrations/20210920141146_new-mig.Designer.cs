@@ -3,14 +3,16 @@ using System;
 using ExpenseManagement.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpenseManagement.Data.Migrations
 {
     [DbContext(typeof(ExpenseManagementDbContext))]
-    partial class ExpenseManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210920141146_new-mig")]
+    partial class newmig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,8 @@ namespace ExpenseManagement.Data.Migrations
 
             modelBuilder.Entity("ExpenseManagement.Domain.Entities.Expense", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Amount")

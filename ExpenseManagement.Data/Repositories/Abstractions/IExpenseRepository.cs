@@ -10,8 +10,8 @@ namespace ExpenseManagement.Data.Repositories.Abstractions
     public interface IExpenseRepository
     {
         Task<Expense> Create(Expense expense);
-        Expense GetExpense(Guid expenseId);
+        Expense GetExpense(string expenseId);
         List<Expense> GetExpenses();
-        bool UpdateStatus(Guid expenseId, ExpenseStatus status);
+        bool UpdateStatus(string expenseId, ExpenseStatus status);
     }
 }

@@ -21,7 +21,7 @@ namespace ExpenseManagement.Services.Implementations
         {
             try
             {
-                bool result = _budgetRepository.Update(amount);
+                var result = _budgetRepository.Update(amount);
                 return result;
             }
             catch (Exception ex)
